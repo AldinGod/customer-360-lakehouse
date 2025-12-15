@@ -1,0 +1,36 @@
+
+
+services:
+  # LocalStack emulira AWS (S3, SQS, SNS) lokalno
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+      - "4566:4566"   # main LocalStack endpoint
+    environment:
+      - SERVICES=s3,sqs,sns
+      - DEBUG=1
+      - LOCALSTACK_PERSISTENCE=1
+      - AWS_DEFAULT_REGION=eu-central-1
+    volumes:
+      # init skripte koje se izvršavaju kad je LocalStack spreman
+      - "./infra/localstack/init-scripts:/etc/localstack/init/ready.d"
+      # lokalni storage za LocalStack (da ne gubiš resurse kad gasiš kontejnere)
+      - "localstack_data:/var/lib/localstack"
+
+  # PostgreSQL kao analytics / DW baza
+  postgres:
+    image: postgres:16
+    container_name: customer360-postgres
+    environment:
+      POSTGRES_DB: customer360
+      POSTGRES_USER: customer360
+      POSTGRES_PASSWORD: customer360
+    ports:
+      - "5433:5432"
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+
+volumes:
+  localstack_data:
+  postgres_data:

@@ -1,0 +1,17 @@
+cat > requirements.txt << 'EOF'
+# Core data engineering / orchestration libs
+apache-airflow
+pyspark
+boto3
+botocore
+requests
+pandas
+sqlalchemy
+psycopg2-binary
+
+# Data quality (we may use this later)
+great_expectations
+
+# Dashboard (choose one later)
+streamlit
+EOF
