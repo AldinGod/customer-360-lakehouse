@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # Customer 360 Lakehouse on LocalStack
 
 This project is an end-to-end **data platform** built locally using **LocalStack (AWS emulation)**, **Apache Spark**, **Airflow**, and **PostgreSQL**.
